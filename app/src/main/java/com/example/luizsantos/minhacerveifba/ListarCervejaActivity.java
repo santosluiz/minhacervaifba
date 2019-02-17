@@ -1,6 +1,5 @@
 package com.example.luizsantos.minhacerveifba;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,9 +11,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
+
+import com.example.luizsantos.minhacerveifba.DAO.CervejaDAO;
+import com.example.luizsantos.minhacerveifba.Domain.Cerveja;
+import com.example.luizsantos.minhacerveifba.Domain.TipoCerveja;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,7 @@ public class ListarCervejaActivity extends AppCompatActivity {
     private CervejaDAO dao;
     private List<Cerveja> cerveja;
     private List<Cerveja> cervejaFiltradas = new ArrayList<>();
+    private List<TipoCerveja> tipos = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,7 @@ public class ListarCervejaActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.listar_cerveja);
         dao = new CervejaDAO(this);
-        cerveja = dao.obterTodos();
+        cerveja = dao.ObterCervejas();
         cervejaFiltradas.addAll(cerveja);
         //ArrayAdapter<Cerveja> adaptador = new ArrayAdapter<Cerveja>(this, android.R.layout.simple_list_item_1, cervejaFiltradas);
         CervejaItemExibir itemExibir = new CervejaItemExibir(this, cervejaFiltradas);
@@ -91,7 +94,7 @@ public class ListarCervejaActivity extends AppCompatActivity {
         final Cerveja cervejaAtualizar = cervejaFiltradas.get(menuInfo.position);
 
         Intent it = new Intent(this, CadastroCervejaActivity.class);
-                it.putExtra("cerveja", cervejaAtualizar);
+                it.putExtra("Cerveja", cervejaAtualizar);
         startActivity(it);
     }
 
@@ -103,14 +106,14 @@ public class ListarCervejaActivity extends AppCompatActivity {
 
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Atenção!")
-                .setMessage("Realmente deseja excluir a cerveja?")
+                .setMessage("Realmente deseja Excluir a cerveja?")
                 .setNegativeButton("NÃO", null)
                 .setPositiveButton("SIM", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
                         cervejaFiltradas.remove(cervejaExcluir);
                         cerveja.remove(cervejaExcluir);
-                        dao.excluir(cervejaExcluir);
+                        dao.Excluir(cervejaExcluir);
                         listView.invalidateViews();
                     }
                 }).create();
@@ -120,7 +123,7 @@ public class ListarCervejaActivity extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
-        cerveja = dao.obterTodos();
+        cerveja = dao.ObterCervejas();
         cervejaFiltradas.addAll(cerveja);
         listView.invalidateViews();
     }

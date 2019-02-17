@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.luizsantos.minhacerveifba.Domain.Cerveja;
+
 import java.util.List;
 
 public class CervejaItemExibir extends BaseAdapter {
@@ -45,9 +47,9 @@ public class CervejaItemExibir extends BaseAdapter {
         Cerveja cerva = cerveja.get(position);
 
         nome.setText(cerva.getNome());
-        tipo.setText(cerva.getTipo());
+        tipo.setText(cerva.getTipoId());
         litragem.setText(cerva.getLitragem());
-        preco.setText(cerva.getPreco());
+        preco.setText(String.valueOf(cerva.getPreco()));
 
         return view;
     }
