@@ -6,8 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.luizsantos.minhacerveifba.Domain.Cerveja;
-import com.example.luizsantos.minhacerveifba.Domain.CervejaLista;
+import com.example.luizsantos.minhacerveifba.Modelo.CervejaLista;
 
 import java.util.List;
 

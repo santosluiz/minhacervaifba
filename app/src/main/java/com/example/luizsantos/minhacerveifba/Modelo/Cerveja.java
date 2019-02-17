@@ -1,4 +1,4 @@
-package com.example.luizsantos.minhacerveifba.Domain;
+package com.example.luizsantos.minhacerveifba.Modelo;
 
 import java.io.Serializable;
 

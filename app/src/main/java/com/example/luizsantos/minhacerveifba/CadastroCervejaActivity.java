@@ -12,8 +12,8 @@ import android.widget.Toast;
 
 import com.example.luizsantos.minhacerveifba.DAO.CervejaDAO;
 import com.example.luizsantos.minhacerveifba.DAO.TipoCervejaDAO;
-import com.example.luizsantos.minhacerveifba.Domain.Cerveja;
-import com.example.luizsantos.minhacerveifba.Domain.TipoCerveja;
+import com.example.luizsantos.minhacerveifba.Modelo.Cerveja;
+import com.example.luizsantos.minhacerveifba.Modelo.TipoCerveja;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -4,8 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import com.example.luizsantos.minhacerveifba.Domain.Cerveja;
-import com.example.luizsantos.minhacerveifba.Domain.CervejaLista;
+import com.example.luizsantos.minhacerveifba.Modelo.Cerveja;
+import com.example.luizsantos.minhacerveifba.Modelo.CervejaLista;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +60,7 @@ public class CervejaDAO {
         banco.update("Cerveja", values, "id = ?", new String[]{ String.valueOf(cerveja.getId()) });
     }
 
-    public List<CervejaLista> ObterListaCerveja(){
+    public List<CervejaLista> obterListaCerveja(){
         List<CervejaLista> cervejas = new ArrayList<>();
 
         String query = "SELECT C.Id, C.Nome, TC.NOME AS NomeTipo, TC.Litragem, C.Preco FROM CERVEJA AS C INNER JOIN TIPOCERVEJA AS TC " +

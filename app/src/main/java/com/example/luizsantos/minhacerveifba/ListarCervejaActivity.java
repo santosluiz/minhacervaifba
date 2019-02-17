@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 
 import com.example.luizsantos.minhacerveifba.DAO.CervejaDAO;
-import com.example.luizsantos.minhacerveifba.Domain.*;
+import com.example.luizsantos.minhacerveifba.Modelo.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ public class ListarCervejaActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.listar_cerveja);
         dao = new CervejaDAO(this);
-        cervejas = dao.ObterListaCerveja();
+        cervejas = dao.obterListaCerveja();
         cervejaFiltradas.addAll(cervejas);
 
         CervejaItemExibir itemExibir = new CervejaItemExibir(this, cervejaFiltradas);
@@ -122,7 +122,7 @@ public class ListarCervejaActivity extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
-        //cervejas = dao.ObterListaCerveja();
+        //cervejas = dao.obterListaCerveja();
         //cervejaFiltradas.addAll(cervejas);
         listView.invalidateViews();
     }

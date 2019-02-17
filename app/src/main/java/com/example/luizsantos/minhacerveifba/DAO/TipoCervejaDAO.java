@@ -1,14 +1,12 @@
 package com.example.luizsantos.minhacerveifba.DAO;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.luizsantos.minhacerveifba.Domain.TipoCerveja;
+import com.example.luizsantos.minhacerveifba.Modelo.TipoCerveja;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TipoCervejaDAO {
 
