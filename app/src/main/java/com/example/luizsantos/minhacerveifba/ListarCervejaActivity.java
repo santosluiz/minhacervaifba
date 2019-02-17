@@ -15,8 +15,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 
 import com.example.luizsantos.minhacerveifba.DAO.CervejaDAO;
-import com.example.luizsantos.minhacerveifba.Domain.Cerveja;
-import com.example.luizsantos.minhacerveifba.Domain.TipoCerveja;
+import com.example.luizsantos.minhacerveifba.Domain.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +24,8 @@ public class ListarCervejaActivity extends AppCompatActivity {
 
     private ListView listView;
     private CervejaDAO dao;
-    private List<Cerveja> cerveja;
-    private List<Cerveja> cervejaFiltradas = new ArrayList<>();
+    private List<CervejaLista> cervejas;
+    private List<CervejaLista> cervejaFiltradas = new ArrayList<>();
     private List<TipoCerveja> tipos = new ArrayList<>();
 
     @Override
@@ -36,9 +35,9 @@ public class ListarCervejaActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.listar_cerveja);
         dao = new CervejaDAO(this);
-        cerveja = dao.ObterCervejas();
-        cervejaFiltradas.addAll(cerveja);
-        //ArrayAdapter<Cerveja> adaptador = new ArrayAdapter<Cerveja>(this, android.R.layout.simple_list_item_1, cervejaFiltradas);
+        cervejas = dao.ObterListaCerveja();
+        cervejaFiltradas.addAll(cervejas);
+
         CervejaItemExibir itemExibir = new CervejaItemExibir(this, cervejaFiltradas);
         listView.setAdapter(itemExibir);
         registerForContextMenu(listView);
@@ -68,12 +67,11 @@ public class ListarCervejaActivity extends AppCompatActivity {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater i = getMenuInflater();
         i.inflate(R.menu.menu_context, menu);
-
     }
 
     public void procuraCerveja(String nome){
         cervejaFiltradas.clear();
-        for(Cerveja c: cerveja){
+        for(CervejaLista c: cervejas){
             if(c.getNome().toLowerCase().contains(nome.toLowerCase())){
                 cervejaFiltradas.add(c);
             }
@@ -91,10 +89,11 @@ public class ListarCervejaActivity extends AppCompatActivity {
         //Pega Aluno que foi selecionado
         AdapterView.AdapterContextMenuInfo menuInfo =
                 (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        final Cerveja cervejaAtualizar = cervejaFiltradas.get(menuInfo.position);
+        final CervejaLista cervejaIndex = cervejaFiltradas.get(menuInfo.position);
+        final Cerveja cerveja = dao.obterCervejaPorId(cervejaIndex.getId());
 
         Intent it = new Intent(this, CadastroCervejaActivity.class);
-                it.putExtra("Cerveja", cervejaAtualizar);
+                it.putExtra("Cerveja", cerveja);
         startActivity(it);
     }
 
@@ -102,7 +101,7 @@ public class ListarCervejaActivity extends AppCompatActivity {
         AdapterView.AdapterContextMenuInfo menuInfo =
                 (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
 
-        final Cerveja cervejaExcluir = cervejaFiltradas.get(menuInfo.position);
+        final CervejaLista cervejaExcluir = cervejaFiltradas.get(menuInfo.position);
 
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Atenção!")
@@ -112,8 +111,8 @@ public class ListarCervejaActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
                         cervejaFiltradas.remove(cervejaExcluir);
-                        cerveja.remove(cervejaExcluir);
-                        dao.Excluir(cervejaExcluir);
+                        cervejas.remove(cervejaExcluir);
+                        dao.Excluir(cervejaExcluir.getId());
                         listView.invalidateViews();
                     }
                 }).create();
@@ -123,8 +122,8 @@ public class ListarCervejaActivity extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
-        cerveja = dao.ObterCervejas();
-        cervejaFiltradas.addAll(cerveja);
+        //cervejas = dao.ObterListaCerveja();
+        //cervejaFiltradas.addAll(cervejas);
         listView.invalidateViews();
     }
 }

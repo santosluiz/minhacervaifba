@@ -7,15 +7,16 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.luizsantos.minhacerveifba.Domain.Cerveja;
+import com.example.luizsantos.minhacerveifba.Domain.CervejaLista;
 
 import java.util.List;
 
 public class CervejaItemExibir extends BaseAdapter {
 
-    private List<Cerveja> cerveja;
+    private List<CervejaLista> cerveja;
     private Activity activity;
 
-    public CervejaItemExibir(Activity activity, List<Cerveja> cerveja) {
+    public CervejaItemExibir(Activity activity, List<CervejaLista> cerveja) {
         this.activity = activity;
         this.cerveja = cerveja;
     }
@@ -41,14 +42,12 @@ public class CervejaItemExibir extends BaseAdapter {
         View view = activity.getLayoutInflater().inflate(R.layout.item_exibir, parent, false);
         TextView nome = view.findViewById(R.id.txt_nome);
         TextView tipo = view.findViewById(R.id.txt_tipo);
-        TextView litragem = view.findViewById(R.id.txt_litragem);
         TextView preco = view.findViewById(R.id.txt_preco);
 
-        Cerveja cerva = cerveja.get(position);
+        CervejaLista cerva = cerveja.get(position);
 
         nome.setText(cerva.getNome());
-        tipo.setText(cerva.getTipoId());
-        litragem.setText(cerva.getLitragem());
+        tipo.setText("".concat(cerva.getNomeTipo() + " " + cerva.getLitragem() + " ML"));
         preco.setText(String.valueOf(cerva.getPreco()));
 
         return view;

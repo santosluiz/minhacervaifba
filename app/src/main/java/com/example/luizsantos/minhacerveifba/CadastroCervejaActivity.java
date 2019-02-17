@@ -74,12 +74,11 @@ public class CadastroCervejaActivity extends AppCompatActivity {
 
         //Adiciona a instância da Cerveja para fazer o update
         Intent it = getIntent();
-        if(it.hasExtra("cerveja")){
-            cerveja = (Cerveja) it.getSerializableExtra("cerveja");
+        if(it.hasExtra("Cerveja")){
+            cerveja = (Cerveja) it.getSerializableExtra("Cerveja");
             nome.setText(cerveja.getNome());
-            //tipo.setText(cerveja.getTipoId());
+            spinnerTipoCerveja.setSelection(cerveja.getTipoId() - 1);
             preco.setText(String.valueOf(cerveja.getPreco()));
-
         }
     }
 
@@ -99,7 +98,9 @@ public class CadastroCervejaActivity extends AppCompatActivity {
             cervejaDAO.Atualizar(cerveja);
             Toast.makeText(this, "Cerveja atualizada!", Toast.LENGTH_SHORT).show();
         }
-    }
 
+        Intent homepage = new Intent(this, ListarCervejaActivity.class);
+        startActivity(homepage);
+    }
 
 }
