@@ -1,21 +1,21 @@
 package com.example.luizsantos.minhacerveifba;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.luizsantos.minhacerveifba.Modelo.CervejaLista;
 
 import java.util.List;
 
-public class CervejaItemExibir extends BaseAdapter {
-
+public class CervejaBarata {
     private List<CervejaLista> cerveja;
     private Activity activity;
 
-    public CervejaItemExibir(Activity activity, List<CervejaLista> cerveja) {
+    /*public CervejaItemExibir(Activity activity, List<CervejaLista> cerveja) {
         this.activity = activity;
         this.cerveja = cerveja;
     }
@@ -38,10 +38,10 @@ public class CervejaItemExibir extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //Cria um item novo na tela de exibir (a cada chamada)
-        View view = activity.getLayoutInflater().inflate(R.layout.item_exibir, parent, false);
+        View view = activity.getLayoutInflater().inflate(R.layout.activity_cerveja_barata, parent, false);
         TextView nome = view.findViewById(R.id.txt_nomeBarata);
         TextView tipo = view.findViewById(R.id.txt_tipoBarata);
-        TextView preco = view.findViewById(R.id.txt_preco);
+        TextView preco = view.findViewById(R.id.txt_precoBarata);
 
         CervejaLista cerva = cerveja.get(position);
 
@@ -50,5 +50,7 @@ public class CervejaItemExibir extends BaseAdapter {
         preco.setText(String.valueOf(cerva.getPreco()));
 
         return view;
-    }
+    } */
+
+
 }

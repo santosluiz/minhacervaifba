@@ -19,7 +19,12 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void goToListarActivity(View view) {
-        Intent intent = new Intent(this, ListarCervejaActivity.class);
-        startActivity(intent);
+        Intent telaListar = new Intent(this, ListarCervejaActivity.class);
+        startActivity(telaListar);
+    }
+
+    public void goToCervejaBarata(View view) {
+        Intent telaCervaBarata = new Intent(this, CervejaBarata.class);
+        startActivity(telaCervaBarata);
     }
 }
